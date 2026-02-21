@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Midnight · off the hook</title>
+        <!-- Font & Icons -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .logot{
+              width: 180px;
+              transform: translatey(50px);
+              z-index: -1000;
+            }
+            body {
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                background: #000000; /* pure black — X.com core */
+                color: #e7e9ea;
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            /* X.com / dark theme palette */
+            :root {
+                --bg: #000000;
+                --card-bg: #0a0a0a;
+                --border-gray: #2f3336;
+                --text-primary: #e7e9ea;
+                --text-secondary: #71767b;
+                --accent-blue: #1d9bf0;
+                --accent-hover: #1a8cd8;
+                --gray-cta: #181818;
+                --success-green: #00ba7c;
+                --error-red: #f4212e;
+            }
+
+            .wrapper {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 32px;
+            }
+
+            /* navigation — minimal X style */
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 0;
+                border-bottom: 1px solid var(--border-gray);
+                margin-bottom: 32px;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .logo img {
+                width: 120px;
+                filter: drop-shadow(0 0 6px rgba(29, 155, 240, 0.5));
+                border-radius: 50%;
+            }
+
+            .logo span {
+                transform: translatex(-25px);
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                background: linear-gradient(135deg, #fff, #b0b6bd);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 28px;
+                align-items: center;
+            }
+
+            .nav-links a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 15px;
+                transition: color 0.2s;
+            }
+
+            .nav-links a:hover {
+                color: var(--text-primary);
+            }
+
+            .nav-early {
+                background: var(--accent-blue);
+                color: #fff !important;
+                padding: 8px 20px;
+                border-radius: 24px;
+                font-weight: 600;
+                font-size: 14px;
+                background-color: #1d9bf0;
+            }
+            .nav-early:hover {
+                background-color: var(--accent-hover);
+                color: #fff !important;
+            }
+
+            /* HERO — X.com style bold statement */
+            .hero {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 48px 0 32px;
+                border-bottom: 1px solid var(--border-gray);
+            }
+
+            .hero i {
+                font-size: 64px;
+                color: var(--accent-blue);
+                margin-bottom: 20px;
+                background: #031018;
+                padding: 20px;
+                border-radius: 60px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+                font-weight: 700;
+                letter-spacing: -1.5px;
+                line-height: 1.1;
+                max-width: 800px;
+                background: linear-gradient(135deg, #fff, #c4c9d0);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero .sub {
+                font-size: 20px;
+                color: var(--text-secondary);
+                margin: 20px 0 24px;
+                max-width: 600px;
+            }
+
+            /* stats / social proof (mimics engagement) */
+            .stats-row {
+                display: flex;
+                gap: 32px;
+                justify-content: center;
+                margin: 30px 0 20px;
+                color: var(--text-secondary);
+                font-size: 15px;
+            }
+
+            .stats-row i {
+                font-size: 18px;
+                margin-right: 6px;
+                color: var(--accent-blue);
+                background: transparent;
+                padding: 0;
+            }
+            .stats-row span {
+                font-weight: 600;
+                color: var(--text-primary);
+                margin-right: 4px;
+            }
+
+            /* early access / wishlist card — clean dark, X style */
+            .card-early {
+                background: var(--card-bg);
+                border: 1px solid var(--border-gray);
+                border-radius: 32px;
+                padding: 40px 32px;
+                margin: 48px 0;
+                box-shadow: 0 10px 30px -10px rgba(29, 155, 240, 0.2);
+            }
+
+            .card-header {
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                margin-bottom: 24px;
+            }
+            .card-header i {
+                font-size: 28px;
+                color: var(--accent-blue);
+            }
+            .card-header h2 {
+                font-size: 28px;
+                font-weight: 600;
+            }
+            .caption {
+                color: var(--text-secondary);
+                margin-bottom: 28px;
+                font-size: 17px;
+                max-width: 500px;
+            }
+
+            .wishlist-form {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                max-width: 500px;
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .input-group label {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .input-group input {
+                background: #0f0f0f;
+                border: 1px solid var(--border-gray);
+                border-radius: 12px;
+                padding: 16px 18px;
+                font-size: 16px;
+                color: var(--text-primary);
+                outline: none;
+                transition:
+                    border 0.15s,
+                    box-shadow 0.15s;
+            }
+
+            .input-group input:focus {
+                border-color: var(--accent-blue);
+                box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.3);
+            }
+
+            .checkbox-line {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin: 12px 0 8px;
+            }
+            .checkbox-line input {
+                width: 20px;
+                height: 20px;
+                accent-color: var(--accent-blue);
+            }
+            .checkbox-line label {
+                color: var(--text-secondary);
+                font-size: 15px;
+            }
+
+            .btn-primary {
+                background: var(--accent-blue);
+                border: none;
+                border-radius: 30px;
+                padding: 16px 24px;
+                font-weight: 700;
+                font-size: 18px;
+                color: #fff;
+                cursor: pointer;
+                transition: background 0.2s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                border: 1px solid transparent;
+            }
+
+            .btn-primary:hover {
+                background: var(--accent-hover);
+            }
+
+            .btn-outline {
+                background: transparent;
+                border: 1px solid var(--border-gray);
+                border-radius: 30px;
+                padding: 14px 28px;
+                font-weight: 600;
+                color: var(--text-primary);
+                cursor: pointer;
+                transition: background 0.15s;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .btn-outline:hover {
+                background: #181818;
+            }
+
+            .success-message,
+            .error-message {
+                margin-top: 20px;
+                padding: 16px;
+                border-radius: 12px;
+                display: none;
+                align-items: center;
+                gap: 12px;
+                font-weight: 500;
+            }
+            .success-message {
+                background: #003d2b;
+                border: 1px solid var(--success-green);
+                color: #b0f0d0;
+            }
+            .error-message {
+                background: #3f1015;
+                border: 1px solid var(--error-red);
+                color: #ffb0b0;
+            }
+
+            /* FEATURE GRID — dark & minimal */
+            .features {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2px;
+                background: var(--border-gray);
+                border: 1px solid var(--border-gray);
+                border-radius: 24px;
+                overflow: hidden;
+                margin: 60px 0;
+            }
+
+            .feature-item {
+                background: var(--card-bg);
+                padding: 32px 24px;
+                text-align: left;
+            }
+
+            .feature-item i {
+                font-size: 32px;
+                color: var(--accent-blue);
+                margin-bottom: 16px;
+            }
+
+            .feature-item h3 {
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+
+            .feature-item p {
+                color: var(--text-secondary);
+                font-size: 15px;
+            }
+
+            /* comment showcase (from screenshots) — x.com style quote */
+            .tweet-thread {
+                margin: 50px 0;
+                border-top: 1px solid var(--border-gray);
+                padding-top: 40px;
+            }
+            .tweet-thread h4 {
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 24px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .tweet-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                background: var(--border-gray);
+                border: 1px solid var(--border-gray);
+                border-radius: 20px;
+                overflow: hidden;
+            }
+            /* mobile */
+            @media (max-width: 800px) {
+                .hero h1 {
+                    font-size: 44px;
+                }
+                .features {
+                    grid-template-columns: 1fr;
+                }
+                .navbar {
+                    flex-direction: column;
+                    align-items: start;
+                }
+                .nav-links {
+                    flex-wrap: wrap;
+                }
+                /* Add this footer fix */
+                .footer {
+                    flex-direction: column;
+                    gap: 20px;
+                    align-items: flex-start;
+                    width: 100%;
+                }
+                .footer-links {
+                    flex-wrap: wrap;
+                    gap: 16px;
+                }
+            }
+            .tweet {
+                background: var(--card-bg);
+                padding: 18px 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .tweet-author {
+                font-weight: 700;
+                color: var(--text-primary);
+            }
+            .tweet-author span {
+                color: var(--text-secondary);
+                font-weight: 400;
+                margin-left: 8px;
+            }
+            .tweet-text {
+                color: var(--text-primary);
+                font-size: 16px;
+            }
+            .tweet-emoji {
+                color: var(--accent-blue);
+                margin-right: 4px;
+            }
+
+            /* footer minimal */
+            .footer {
+                border-top: 1px solid var(--border-gray);
+                padding: 32px 0;
+                margin-top: 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--text-secondary);
+                font-size: 14px;
+            }
+            .footer-links {
+                display: flex;
+                gap: 28px;
+            }
+
+            /* mobile */
+            @media (max-width: 800px) {
+                .hero h1 {
+                    font-size: 44px;
+                }
+                .features {
+                    grid-template-columns: 1fr;
+                }
+                .navbar {
+                    flex-direction: column;
+                    align-items: start;
+                }
+                .nav-links {
+                    flex-wrap: wrap;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <!-- Navigation — X.com minimal -->
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="logo1.png" alt="logo1" />
+                    <span>midnight.</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#">About</a>
+                    <a href="#">Safety</a>
+                    <a href="#">Blog</a>
+                    <a href="#" class="nav-early"
+                        ><i class="far fa-star" style="margin-right: 6px"></i
+                        >Wishlist</a
+                    >
+                </div>
+            </nav>
+
+            <!-- Hero — bold hook, exactly from screenshot vibe -->
+            <div class="hero">
+                <i class="fas fa-bolt"></i>
+                <h1>be honest.<br />get booked.</h1>
+                <div class="sub">
+                    the first app where guys upload themselves & get booked as
+                    male OS or hookup — straight up.
+                </div>
+
+                <!-- social stats like X post engagement -->
+                <div class="stats-row">
+                    <div>
+                        <i class="fas fa-comment"></i> <span>65</span> comments
+                    </div>
+                    <div>
+                        <i class="fas fa-retweet"></i> <span>2.4K</span> reposts
+                    </div>
+                    <div>
+                        <i class="far fa-heart"></i> <span>17.2K</span> likes
+                    </div>
+                    <div>
+                        <i class="far fa-bookmark"></i> <span>4.1K</span> saves
+                    </div>
+                </div>
+
+                <!-- direct CTA twin buttons — X.com style -->
+                <div
+                    style="
+                        display: flex;
+                        gap: 16px;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        margin-top: 16px;
+                    "
+                >
+                    <button
+                        class="btn-primary"
+                        onclick="
+                            document
+                                .getElementById('early-card')
+                                .scrollIntoView({ behavior: 'smooth' })
+                        "
+                    >
+                        <i class="fas fa-calendar-check"></i> join wishlist
+                    </button>
+                    <!--<button class="btn-outline"><i class="fab fa-google-play"></i> waitlist on Android</button> -->
+                </div>
+            </div>
+
+            <!-- EARLY ACCESS / WISHLIST CARD — X theme, exactly what you requested (wishlist) -->
+            <div class="card-early" id="early-card">
+                <div class="card-header">
+                    <i class="fas fa-star"></i>
+                    <h2>get on the wishlist ⏳</h2>
+                </div>
+                <p class="caption">
+                    Midnight is dropping soon. Add yourself to the wishlist —
+                    we’ll text you the moment it’s live. (Naija first, then
+                    everywhere.)
+                </p>
+
+                <!-- wishlist form (full) -->
+                <div class="wishlist-form" id="wishlistForm">
+                    <div class="input-group">
+                        <label
+                            ><i
+                                class="far fa-user"
+                                style="margin-right: 6px"
+                            ></i>
+                            display name</label
+                        >
+                        <input
+                            type="text"
+                            id="nameInput"
+                            placeholder="e.g., Larry Kush"
+                            value=""
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label
+                            ><i class="far fa-envelope"></i> email /
+                            phone</label
+                        >
+                        <input
+                            type="text"
+                            id="contactInput"
+                            placeholder="you@example.com or +234..."
+                        />
+                    </div>
+                    <div class="checkbox-line">
+                        <input type="checkbox" id="confirmCheck" checked />
+                        <label for="confirmCheck"
+                            >Notify me when booking
+                            opens.</label
+                        >
+                    </div>
+
+                    <!-- action buttons -->
+                    <div
+                        style="display: flex; gap 16px; flex-wrap: wrap; align-items: center; gap: 16px;"
+                    >
+                        <button class="btn-primary" id="submitWishlist">
+                            <i class="fas fa-paper-plane"></i> join wishlist
+                        </button>
+                        <!--<span style="color: var(--text-secondary)">or</span>
+               <!--         <button class="btn-outline" id="simulateWish">
+                            <i class="fab fa-whatsapp"></i> get WhatsApp alert
+                        </button>-->
+                    </div>
+
+                    <!-- inline messages (success/error) -->
+                    <div class="success-message" id="successMsg">
+                        <i
+                            class="fas fa-check-circle"
+                            style="color: var(--success-green)"
+                        ></i>
+                        You’re on the wishlist! We’ll dm you midnight sharp.
+                    </div>
+                    <div class="error-message" id="errorMsg">
+                        <i
+                            class="fas fa-exclamation-triangle"
+                            style="color: var(--error-red)"
+                        ></i>
+                        <span id="errorText">name and contact needed</span>
+                    </div>
+                </div>
+
+                <!-- extra wishlist proof (like X community note) -->
+                <div
+                    style="
+                        margin-top: 28px;
+                        border-top: 1px solid var(--border-gray);
+                        padding-top: 24px;
+                        display: flex;
+                        gap: 20px;
+                        flex-wrap: wrap;
+                        color: var(--text-secondary);
+                    "
+                >
+                    <span
+                        ><i
+                            class="fas fa-check-circle"
+                            style="color: var(--success-green)"
+                        ></i>
+                        already <span id="wishCount">250</span> on
+                        wishlist</span
+                    >
+                    <span
+                        ><i class="fas fa-map-pin"></i> The internet, duuh?!</span
+                    >
+                </div>
+            </div>
+
+            <!-- features based on screenshot needs -->
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-toggle-on"></i>
+                    <h3>Available now</h3>
+                    <p>
+                        Flip the “Available” switch — like ISIAKA said — and get
+                        booked instantly.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-eye-slash"></i>
+                    <h3>discretion first</h3>
+                    <p>
+                        Blur until match, verified profiles. no catfish, just
+                        real OS/hookup.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>gbemidebe speed</h3>
+                    <p>
+                        As Larry talk am: “you dey dull? c’mon gbemidebe.” we
+                        built for quick booking.
+                    </p>
+                </div>
+            </div>
+
+            <!-- screenshot comment thread replica (X theme) to show validation -->
+            <div class="tweet-thread">
+                <h4>
+                    <i
+                        class="fas fa-message"
+                        style="color: var(--accent-blue)"
+                    ></i>
+                    65 comments · from the 9JA space thread
+                </h4>
+                <div class="tweet-grid">
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >Anna Mary <span>· 7:55 PM</span></span
+                        ><span class="tweet-text"
+                            >I'm a developer 😂 Should I make it? 😂😂🤣</span
+                        >
+                    </div>
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >Larry 😂😅😁 Kush <span>· 8:07 PM</span></span
+                        ><span class="tweet-text"
+                            >You dey dull am c'mon gbemidebe
+                            <i class="fas fa-fire tweet-emoji"></i
+                        ></span>
+                    </div>
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >ISIAKA ISA OLAITAN <span>· 8:15 PM</span></span
+                        ><span class="tweet-text">Available</span>
+                    </div>
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >Kel Den <span>· 8:17 PM</span></span
+                        ><span class="tweet-text">Where d site 😂😂</span>
+                    </div>
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >JeriQ Bassey <span>· 8:30 PM</span></span
+                        ><span class="tweet-text">Bro why not</span>
+                    </div>
+                    <div class="tweet">
+                        <span class="tweet-author"
+                            >Adetola <span>· 8:36 PM</span></span
+                        ><span class="tweet-text">Why not?</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- second call to action / wishlist reminder ( X style ) -->
+            <div
+                style="
+                    background: #0a0a0a;
+                    border: 1px solid var(--border-gray);
+                    border-radius: 40px;
+                    padding: 40px;
+                    margin: 30px 0;
+                    text-align: center;
+                "
+            >
+                <img class= "logot" src="logo2.png" alt="logo2">
+                <h3 style="font-size: 32px; font-weight: 700">Don't dull.</h3>
+                <p
+                    style="
+                        font-size: 18px;
+                        color: var(--text-secondary);
+                        margin: 16px 0;
+                    "
+                >
+                    Midnight drops soon. join the wishlist, be first to book.
+                </p>
+                <button
+                    class="btn-primary"
+                    onclick="
+                        document
+                            .getElementById('early-card')
+                            .scrollIntoView({ behavior: 'smooth' })
+                    "
+                    style="padding: 14px 40px"
+                >
+                    <i class="fas fa-star"></i> Join wishlist
+                </button>
+            </div>
+            <!-- footer (minimal X style) -->
+            <div class="footer">
+                <div class="logo" style="gap: 6px">
+                    <i class="fas fa-moon"></i
+                    ><span style="font-size: 16px">midnight · 2026</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#" style="color: inherit; text-decoration: none"
+                        >privacy</a
+                    >
+                    <a href="#" style="color: inherit; text-decoration: none"
+                        >terms</a
+                    >
+                        
+                    <a href="#" style="color: inherit; text-decoration: none"
+                        >@midnightapp</a
+                    >
+                </div>
+            </div>
+        </div>
+
+        
+        <script>
+(function () {
+    const nameInp = document.getElementById("nameInput");
+    const contactInp = document.getElementById("contactInput");
+    const submitBtn = document.getElementById("submitWishlist");
+    const successDiv = document.getElementById("successMsg");
+    const errorDiv = document.getElementById("errorMsg");
+    const errorSpan = document.getElementById("errorText");
+    const wishCountSpan = document.getElementById("wishCount");
+    
+    // Backend URL 
+    const API_URL = 'https://midnight-backend-production.up.railway.app'; 
+
+    function showError(text) {
+        errorSpan.innerText = text;
+        errorDiv.style.display = "flex";
+        successDiv.style.display = "none";
+        setTimeout(() => {
+            errorDiv.style.display = "none";
+        }, 3200);
+    }
+
+    function showSuccess() {
+        successDiv.style.display = "flex";
+        errorDiv.style.display = "none";
+        nameInp.value = "";
+        contactInp.value = "";
+        
+        // Fetch updated count
+        fetch(`${API_URL}/api/stats`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    wishCountSpan.innerText = data.data.total;
+                }
+            })
+            .catch(console.error);
+            
+        setTimeout(() => {
+            successDiv.style.display = "none";
+        }, 4000);
+    }
+
+    submitBtn.addEventListener("click", async e => {
+        e.preventDefault();
+        
+        const name = nameInp.value.trim();
+        const contact = contactInp.value.trim();
+        const check = document.getElementById("confirmCheck").checked;
+
+        if (!name || !contact) {
+            showError("name and email/phone needed");
+            return;
+        }
+        
+        if (!check) {
+            showError("please confirm to get notified");
+            return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> joining...';
+
+        try {
+            const response = await fetch(`${API_URL}/api/wishlist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    contact: contact,
+                    confirmed: check
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showSuccess();
+                wishCountSpan.innerText = data.data.position;
+            } else {
+                showError(data.errors ? data.errors[0].msg : 'Something went wrong');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showError('Network error. Please try again.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> join wishlist';
+        }
+    });
+
+    // Fetch initial count
+    fetch(`${API_URL}/api/stats`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                wishCountSpan.innerText = data.data.total;
+            }
+        })
+        .catch(console.error);
+})();
+</script>
+
+        <!-- random note to match X's dynamic feel: live wish count updater (already in js) -->
+    </body>
+</html>
